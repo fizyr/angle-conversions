@@ -17,7 +17,7 @@ use math::{sqrt, sin, cos, atan2, asin};
 /// * `angle` - The rotation around the axis angle vector to apply in radians.
 ///
 /// Known robots that use this format:
-/// - Staubli
+/// - Staubli (NOTE: this example assumes radians values, but this robot uses degrees)
 fn convert_axis_angle_to_euler_xyz(rx: f64, ry: f64, rz: f64, angle: f64) -> (f64, f64, f64) {
 	let axis_norm = sqrt(rx * rx + ry * ry + rz * rz);
 
@@ -106,6 +106,8 @@ fn convert_axis_angle_to_euler_zxy(rx: f64, ry: f64, rz: f64, angle: f64) -> (f6
 ///
 /// Known robots that use this format:
 /// - Mitsubishi Industrial Robot CR750/CR751 Series
+/// - Kawasaki (NOTE: this example assumes radians values, but this robot uses degrees)
+/// - Kuka (NOTE: this example assumes radians values, but this robot uses degrees)
 fn convert_axis_angle_to_euler_zyx(rx: f64, ry: f64, rz: f64, angle: f64) -> (f64, f64, f64) {
 	let axis_norm = sqrt(rx * rx + ry * ry + rz * rz);
 

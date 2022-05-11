@@ -23,7 +23,12 @@ pub fn sqrt(x: f64) -> f64 {
 	return x.sqrt();
 }
 
-/// atan2 implementation in case the target programming environment does not provide it.
+/// Computes the four quadrant arctangent of y / x in radians.
+///
+/// This atan2 implementation exists in case the target programming environment does not provide it.
+///
+/// Note that the output is returned in radians.
+/// Some adjustments need to be made to use degrees.
 pub fn atan2(y: f64, x: f64) -> f64 {
 	let pi = 3.14159265358979323846;
 
