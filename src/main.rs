@@ -7,7 +7,7 @@
 mod math;
 mod tests;
 
-use math::{sqrt, sin, cos, atan2, asin};
+use math::{sqrt, sin, cos, atan2, asin, clamp};
 
 /// Convert from AxisAngle to Euler XYZ.
 ///
@@ -33,7 +33,7 @@ fn convert_axis_angle_to_euler_xyz(rx: f64, ry: f64, rz: f64, angle: f64) -> (f6
 	let qz = rz / axis_norm * sin_angle;
 
 	let euler_x = atan2(2.0 * (qw * qx - qy * qz), 1.0 - 2.0 * (qx * qx + qy * qy));
-	let euler_y = asin(2.0 * (qx * qz + qw * qy));
+	let euler_y = asin(clamp(2.0 * (qx * qz + qw * qy), -1.0, 1.0));
 	let euler_z = atan2(2.0 * (qw * qz - qx * qy), 1.0 - 2.0 * (qy * qy + qz * qz));
 
 	return (euler_x, euler_y, euler_z);
@@ -61,7 +61,7 @@ fn convert_axis_angle_to_euler_yxz(rx: f64, ry: f64, rz: f64, angle: f64) -> (f6
 	let qy = ry / axis_norm * sin_angle;
 	let qz = rz / axis_norm * sin_angle;
 
-	let euler_x = asin(2.0 * (qw * qx - qy * qz));
+	let euler_x = asin(clamp(2.0 * (qw * qx - qy * qz), -1.0, 1.0));
 	let euler_y = atan2(2.0 * (qx * qz + qw * qy), 1.0 - 2.0 * (qx * qx + qy * qy));
 	let euler_z = atan2(2.0 * (qx * qy + qw * qz), 1.0 - 2.0 * (qx * qx + qz * qz));
 
@@ -90,7 +90,7 @@ fn convert_axis_angle_to_euler_zxy(rx: f64, ry: f64, rz: f64, angle: f64) -> (f6
 	let qy = ry / axis_norm * sin_angle;
 	let qz = rz / axis_norm * sin_angle;
 
-	let euler_x = asin(2.0 * (qy * qz + qw * qx));
+	let euler_x = asin(clamp(2.0 * (qy * qz + qw * qx), -1.0, 1.0));
 	let euler_y = atan2(2.0 * (qw * qy - qx * qz), 1.0 - 2.0 * (qx * qx + qy * qy));
 	let euler_z = atan2(2.0 * (qw * qz - qx * qy), 1.0 - 2.0 * (qx * qx + qz * qz));
 
@@ -123,7 +123,7 @@ fn convert_axis_angle_to_euler_zyx(rx: f64, ry: f64, rz: f64, angle: f64) -> (f6
 	let qz = rz / axis_norm * sin_angle;
 
 	let euler_x = atan2(2.0 * (qy * qz + qw * qx), 1.0 - 2.0 * (qx * qx + qy * qy));
-	let euler_y = asin(2.0 * (qw * qy - qx * qz));
+	let euler_y = asin(clamp(2.0 * (qw * qy - qx * qz), -1.0, 1.0));
 	let euler_z = atan2(2.0 * (qx * qy + qw * qz), 1.0 - 2.0 * (qy * qy + qz * qz));
 
 	return (euler_x, euler_y, euler_z);
@@ -153,7 +153,7 @@ fn convert_axis_angle_to_euler_yzx(rx: f64, ry: f64, rz: f64, angle: f64) -> (f6
 
 	let euler_x = atan2(2.0 * (qw * qx - qy * qz), 1.0 - 2.0 * (qx * qx + qz * qz));
 	let euler_y = atan2(2.0 * (qw * qy - qx * qz), 1.0 - 2.0 * (qy * qy + qz * qz));
-	let euler_z = asin(2.0 * (qx * qy + qw * qz));
+	let euler_z = asin(clamp(2.0 * (qx * qy + qw * qz), -1.0, 1.0));
 
 	return (euler_x, euler_y, euler_z);
 }
@@ -182,7 +182,7 @@ fn convert_axis_angle_to_euler_xzy(rx: f64, ry: f64, rz: f64, angle: f64) -> (f6
 
 	let euler_x = atan2(2.0 * (qy * qz + qw * qx), 1.0 - 2.0 * (qx * qx + qz * qz));
 	let euler_y = atan2(2.0 * (qx * qz + qw * qy), 1.0 - 2.0 * (qy * qy + qz * qz));
-	let euler_z = asin(2.0 * (qw * qz - qx * qy));
+	let euler_z = asin(clamp(2.0 * (qw * qz - qx * qy), -1.0, 1.0));
 
 	return (euler_x, euler_y, euler_z);
 }

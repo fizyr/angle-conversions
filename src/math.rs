@@ -23,6 +23,11 @@ pub fn sqrt(x: f64) -> f64 {
 	return x.sqrt();
 }
 
+/// Wrapper for f64.clamp to make the code more comparable for different programming environments.
+pub fn clamp(x: f64, min: f64, max: f64) -> f64 {
+	return x.clamp(min, max);
+}
+
 /// Computes the four quadrant arctangent of y / x in radians.
 ///
 /// This atan2 implementation exists in case the target programming environment does not provide it.
