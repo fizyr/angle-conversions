@@ -1,4 +1,8 @@
-/// Conversions are derived from https://github.com/mrdoob/three.js/blob/4f0ff2cd014fc02b1213aaa0df842b09708eee39/src/math/Euler.js#L103.
+//! Conversions are derived from https://github.com/mrdoob/three.js/blob/4f0ff2cd014fc02b1213aaa0df842b09708eee39/src/math/Euler.js#L103.
+
+#![allow(clippy::needless_return)]
+#![allow(clippy::excessive_precision)]
+
 
 mod math;
 mod tests;
