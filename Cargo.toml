@@ -6,3 +6,6 @@ publish = ["fizyr"]
 
 [dev-dependencies]
 approx = "0.5.1"
+assert2 = "0.3.6"
+nalgebra = "0.31.0"
+rand = "0.8.5"
