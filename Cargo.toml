@@ -1,0 +1,11 @@
+[package]
+name = "angle-conversion"
+version = "0.1.0"
+edition = "2021"
+publish = ["fizyr"]
+
+[dev-dependencies]
+approx = "0.5.1"
+assert2 = "0.3.6"
+nalgebra = "0.31.0"
+rand = "0.8.5"
