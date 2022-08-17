@@ -54,27 +54,26 @@ fn convert_axis_angle_to_euler_xyz(rx: f64, ry: f64, rz: f64, angle: f64) -> (f6
 /// Known robots that use this format:
 /// - Staubli (NOTE: this example assumes radians values, but this robot uses degrees)
 fn convert_euler_xyz_to_axis_angle(euler_rx: f64, euler_ry: f64, euler_rz: f64) -> (f64, f64, f64, f64) {
-
-	let cx = cos(euler_rx/2.0);
-	let cy = cos(euler_ry/2.0);
-	let cz = cos(euler_rz/2.0);
-	let sx = sin(euler_rx/2.0);
-	let sy = sin(euler_ry/2.0);
-	let sz = sin(euler_rz/2.0);
+	let cx = cos(euler_rx / 2.0);
+	let cy = cos(euler_ry / 2.0);
+	let cz = cos(euler_rz / 2.0);
+	let sx = sin(euler_rx / 2.0);
+	let sy = sin(euler_ry / 2.0);
+	let sz = sin(euler_rz / 2.0);
 
 	// Compute the quaternion
-	let qw = -sx*sy*sz + cx*cy*cz;
-	let qx =  sx*cy*cz + sy*sz*cx;
-	let qy = -sx*sz*cy + sy*cx*cz;
-	let qz =  sx*sy*cz + sz*cx*cy;
+	let qw = -(sx * sy * sz) + (cx * cy * cz);
+	let qx =  (sx * cy * cz) + (sy * sz * cx);
+	let qy = -(sx * sz * cy) + (sy * cx * cz);
+	let qz =  (sx * sy * cz) + (sz * cx * cy);
 
 	// Compute axis angle
-	let rx = qx/sqrt(qx*qx+qy*qy+qz*qz);
-	let ry = qy/sqrt(qx*qx+qy*qy+qz*qz);
-	let rz = qz/sqrt(qx*qx+qy*qy+qz*qz);
-	let angle = 2.0*atan2(sqrt(qx*qx+qy*qy+qz*qz),qw);
+	let rx = qx / sqrt(qx * qx + qy * qy + qz * qz);
+	let ry = qy / sqrt(qx * qx + qy * qy + qz * qz);
+	let rz = qz / sqrt(qx * qx + qy * qy + qz * qz);
+	let angle = 2.0 * atan2(sqrt(qx * qx + qy * qy + qz * qz), qw);
 
-	return (rx,ry,rz,angle);
+	return (rx, ry, rz, angle);
 }
 
 
@@ -119,27 +118,26 @@ fn convert_axis_angle_to_euler_yxz(rx: f64, ry: f64, rz: f64, angle: f64) -> (f6
 ///
 /// Known robots that use this format:
 fn convert_euler_yxz_to_axis_angle(euler_rx: f64, euler_ry: f64, euler_rz: f64) -> (f64, f64, f64, f64) {
-
-	let cx = cos(euler_rx/2.0);
-	let cy = cos(euler_ry/2.0);
-	let cz = cos(euler_rz/2.0);
-	let sx = sin(euler_rx/2.0);
-	let sy = sin(euler_ry/2.0);
-	let sz = sin(euler_rz/2.0);
+	let cx = cos(euler_rx / 2.0);
+	let cy = cos(euler_ry / 2.0);
+	let cz = cos(euler_rz / 2.0);
+	let sx = sin(euler_rx / 2.0);
+	let sy = sin(euler_ry / 2.0);
+	let sz = sin(euler_rz / 2.0);
 
 	// Compute the quaternion
-	let qw =  sy*sx*sz + cy*cx*cz;
-	let qx =  sy*sz*cx + sx*cy*cz;
-	let qy =  sy*cx*cz - sx*sz*cy;
-	let qz = -sy*sx*cz + sz*cy*cx;
+	let qw =  (sy * sx * sz) + (cy * cx * cz);
+	let qx =  (sy * sz * cx) + (sx * cy * cz);
+	let qy =  (sy * cx * cz) - (sx * sz * cy);
+	let qz = -(sy * sx * cz) + (sz * cy * cx);
 
 	// Compute axis angle
-	let rx = qx/sqrt(qx*qx+qy*qy+qz*qz);
-	let ry = qy/sqrt(qx*qx+qy*qy+qz*qz);
-	let rz = qz/sqrt(qx*qx+qy*qy+qz*qz);
-	let angle = 2.0*atan2(sqrt(qx*qx+qy*qy+qz*qz),qw);
+	let rx = qx / sqrt(qx * qx + qy * qy + qz * qz);
+	let ry = qy / sqrt(qx * qx + qy * qy + qz * qz);
+	let rz = qz / sqrt(qx * qx + qy * qy + qz * qz);
+	let angle = 2.0 * atan2(sqrt(qx * qx + qy * qy + qz * qz), qw);
 
-	return (rx,ry,rz,angle);
+	return (rx, ry, rz, angle);
 }
 
 
@@ -184,27 +182,26 @@ fn convert_axis_angle_to_euler_zxy(rx: f64, ry: f64, rz: f64, angle: f64) -> (f6
 ///
 /// Known robots that use this format:
 fn convert_euler_zxy_to_axis_angle(euler_rx: f64, euler_ry: f64, euler_rz: f64) -> (f64, f64, f64, f64) {
-
-	let cx = cos(euler_rx/2.0);
-	let cy = cos(euler_ry/2.0);
-	let cz = cos(euler_rz/2.0);
-	let sx = sin(euler_rx/2.0);
-	let sy = sin(euler_ry/2.0);
-	let sz = sin(euler_rz/2.0);
+	let cx = cos(euler_rx / 2.0);
+	let cy = cos(euler_ry / 2.0);
+	let cz = cos(euler_rz / 2.0);
+	let sx = sin(euler_rx / 2.0);
+	let sy = sin(euler_ry / 2.0);
+	let sz = sin(euler_rz / 2.0);
 
 	// Compute the quaternion
-	let qw = -sz*sx*sy + cz*cx*cy;
-	let qx = -sz*sy*cx + sx*cz*cy;
-	let qy =  sz*sx*cy + sy*cz*cx;
-	let qz =  sz*cx*cy + sx*sy*cz;
+	let qw = -(sz * sx * sy) + (cz * cx * cy);
+	let qx = -(sz * sy * cx) + (sx * cz * cy);
+	let qy =  (sz * sx * cy) + (sy * cz * cx);
+	let qz =  (sz * cx * cy) + (sx * sy * cz);
 
 	// Compute axis angle
-	let rx = qx/sqrt(qx*qx+qy*qy+qz*qz);
-	let ry = qy/sqrt(qx*qx+qy*qy+qz*qz);
-	let rz = qz/sqrt(qx*qx+qy*qy+qz*qz);
-	let angle = 2.0*atan2(sqrt(qx*qx+qy*qy+qz*qz),qw);
+	let rx = qx / sqrt(qx * qx + qy * qy + qz * qz);
+	let ry = qy / sqrt(qx * qx + qy * qy + qz * qz);
+	let rz = qz / sqrt(qx * qx + qy * qy + qz * qz);
+	let angle = 2.0 * atan2(sqrt(qx * qx + qy * qy + qz * qz), qw);
 
-	return (rx,ry,rz,angle);
+	return (rx, ry, rz, angle);
 }
 
 /// Convert from AxisAngle to Euler ZYX.
@@ -254,27 +251,26 @@ fn convert_axis_angle_to_euler_zyx(rx: f64, ry: f64, rz: f64, angle: f64) -> (f6
 /// - Kawasaki (NOTE: this example assumes radians values, but this robot uses degrees)
 /// - Kuka (NOTE: this example assumes radians values, but this robot uses degrees)
 fn convert_euler_zyx_to_axis_angle(euler_rx: f64, euler_ry: f64, euler_rz: f64) -> (f64, f64, f64, f64) {
-
-	let cx = cos(euler_rx/2.0);
-	let cy = cos(euler_ry/2.0);
-	let cz = cos(euler_rz/2.0);
-	let sx = sin(euler_rx/2.0);
-	let sy = sin(euler_ry/2.0);
-	let sz = sin(euler_rz/2.0);
+	let cx = cos(euler_rx / 2.0);
+	let cy = cos(euler_ry / 2.0);
+	let cz = cos(euler_rz / 2.0);
+	let sx = sin(euler_rx / 2.0);
+	let sy = sin(euler_ry / 2.0);
+	let sz = sin(euler_rz / 2.0);
 
 	// Compute the quaternion
-	let qw =  sz*sy*sx + cz*cy*cx;
-	let qx = -sz*sy*cx + sx*cz*cy;
-	let qy =  sz*sx*cy + sy*cz*cx;
-	let qz =  sz*cy*cx - sy*sx*cz;
+	let qw =  (sz * sy * sx) + (cz * cy * cx);
+	let qx = -(sz * sy * cx) + (sx * cz * cy);
+	let qy =  (sz * sx * cy) + (sy * cz * cx);
+	let qz =  (sz * cy * cx) - (sy * sx * cz);
 
 	// Compute axis angle
-	let rx = qx/sqrt(qx*qx+qy*qy+qz*qz);
-	let ry = qy/sqrt(qx*qx+qy*qy+qz*qz);
-	let rz = qz/sqrt(qx*qx+qy*qy+qz*qz);
-	let angle = 2.0*atan2(sqrt(qx*qx+qy*qy+qz*qz),qw);
+	let rx = qx / sqrt(qx * qx + qy * qy + qz * qz);
+	let ry = qy / sqrt(qx * qx + qy * qy + qz * qz);
+	let rz = qz / sqrt(qx * qx + qy * qy + qz * qz);
+	let angle = 2.0 * atan2(sqrt(qx * qx + qy * qy + qz * qz), qw);
 
-	return (rx,ry,rz,angle);
+	return (rx, ry, rz, angle);
 }
 
 /// Convert from AxisAngle to Euler YZX.
@@ -318,27 +314,26 @@ fn convert_axis_angle_to_euler_yzx(rx: f64, ry: f64, rz: f64, angle: f64) -> (f6
 ///
 /// Known robots that use this format:
 fn convert_euler_yzx_to_axis_angle(euler_rx: f64, euler_ry: f64, euler_rz: f64) -> (f64, f64, f64, f64) {
-
-	let cx = cos(euler_rx/2.0);
-	let cy = cos(euler_ry/2.0);
-	let cz = cos(euler_rz/2.0);
-	let sx = sin(euler_rx/2.0);
-	let sy = sin(euler_ry/2.0);
-	let sz = sin(euler_rz/2.0);
+	let cx = cos(euler_rx / 2.0);
+	let cy = cos(euler_ry / 2.0);
+	let cz = cos(euler_rz / 2.0);
+	let sx = sin(euler_rx / 2.0);
+	let sy = sin(euler_ry / 2.0);
+	let sz = sin(euler_rz / 2.0);
 
 	// Compute the quaternion
-	let qw = -sy*sz*sx + cy*cz*cx;
-	let qx =  sy*sz*cx + sx*cy*cz;
-	let qy =  sy*cz*cx + sz*sx*cy;
-	let qz = -sy*sx*cz + sz*cy*cx;
+	let qw = -(sy * sz * sx) + (cy * cz * cx);
+	let qx =  (sy * sz * cx) + (sx * cy * cz);
+	let qy =  (sy * cz * cx) + (sz * sx * cy);
+	let qz = -(sy * sx * cz) + (sz * cy * cx);
 
 	// Compute axis angle
-	let rx = qx/sqrt(qx*qx+qy*qy+qz*qz);
-	let ry = qy/sqrt(qx*qx+qy*qy+qz*qz);
-	let rz = qz/sqrt(qx*qx+qy*qy+qz*qz);
-	let angle = 2.0*atan2(sqrt(qx*qx+qy*qy+qz*qz),qw);
+	let rx = qx / sqrt(qx * qx + qy * qy + qz * qz);
+	let ry = qy / sqrt(qx * qx + qy * qy + qz * qz);
+	let rz = qz / sqrt(qx * qx + qy * qy + qz * qz);
+	let angle = 2.0 * atan2(sqrt(qx * qx + qy * qy + qz * qz), qw);
 
-	return (rx,ry,rz,angle);
+	return (rx, ry, rz, angle);
 }
 
 
@@ -383,27 +378,26 @@ fn convert_axis_angle_to_euler_xzy(rx: f64, ry: f64, rz: f64, angle: f64) -> (f6
 ///
 /// Known robots that use this format:
 fn convert_euler_xzy_to_axis_angle(euler_rx: f64, euler_ry: f64, euler_rz: f64) -> (f64, f64, f64, f64) {
-
-	let cx = cos(euler_rx/2.0);
-	let cy = cos(euler_ry/2.0);
-	let cz = cos(euler_rz/2.0);
-	let sx = sin(euler_rx/2.0);
-	let sy = sin(euler_ry/2.0);
-	let sz = sin(euler_rz/2.0);
+	let cx = cos(euler_rx / 2.0);
+	let cy = cos(euler_ry / 2.0);
+	let cz = cos(euler_rz / 2.0);
+	let sx = sin(euler_rx / 2.0);
+	let sy = sin(euler_ry / 2.0);
+	let sz = sin(euler_rz / 2.0);
 
 	// Compute the quaternion
-	let qw =  sx*sz*sy + cx*cz*cy;
-	let qx =  sx*cz*cy - sz*sy*cx;
-	let qy = -sx*sz*cy + sy*cx*cz;
-	let qz =  sx*sy*cz + sz*cx*cy;
+	let qw =  (sx * sz * sy) + (cx * cz * cy);
+	let qx =  (sx * cz * cy) - (sz * sy * cx);
+	let qy = -(sx * sz * cy) + (sy * cx * cz);
+	let qz =  (sx * sy * cz) + (sz * cx * cy);
 
 	// Compute axis angle
-	let rx = qx/sqrt(qx*qx+qy*qy+qz*qz);
-	let ry = qy/sqrt(qx*qx+qy*qy+qz*qz);
-	let rz = qz/sqrt(qx*qx+qy*qy+qz*qz);
-	let angle = 2.0*atan2(sqrt(qx*qx+qy*qy+qz*qz),qw);
+	let rx = qx / sqrt(qx * qx + qy * qy + qz * qz);
+	let ry = qy / sqrt(qx * qx + qy * qy + qz * qz);
+	let rz = qz / sqrt(qx * qx + qy * qy + qz * qz);
+	let angle = 2.0 * atan2(sqrt(qx * qx + qy * qy + qz * qz), qw);
 
-	return (rx,ry,rz,angle);
+	return (rx, ry, rz, angle);
 }
 
 
