@@ -22,7 +22,7 @@ use math::{sqrt, sin, cos, atan2, asin, clamp};
 /// * `rz` - The Z component of the axis angle vector.
 /// * `angle` - The rotation around the axis angle vector to apply in radians.
 ///
-/// Known robots that use this format:
+/// Known robots that use Euler XYZ:
 /// - Staubli (NOTE: this example assumes radians values, but this robot uses degrees)
 fn convert_axis_angle_to_euler_xyz(rx: f64, ry: f64, rz: f64, angle: f64) -> (f64, f64, f64) {
 	let axis_norm = sqrt(rx * rx + ry * ry + rz * rz);
@@ -51,7 +51,7 @@ fn convert_axis_angle_to_euler_xyz(rx: f64, ry: f64, rz: f64, angle: f64) -> (f6
 /// * `euler_ry` - The rotation around the Y axis.
 /// * `euler_rz` - The rotation around the Z axis.
 ///
-/// Known robots that use this format:
+/// Known robots that use Euler XYZ:
 /// - Staubli (NOTE: this example assumes radians values, but this robot uses degrees)
 fn convert_euler_xyz_to_axis_angle(euler_rx: f64, euler_ry: f64, euler_rz: f64) -> (f64, f64, f64, f64) {
 	let cx = cos(euler_rx / 2.0);
@@ -88,7 +88,7 @@ fn convert_euler_xyz_to_axis_angle(euler_rx: f64, euler_ry: f64, euler_rz: f64) 
 /// * `rz` - The Z component of the axis angle vector.
 /// * `angle` - The rotation around the axis angle vector to apply in radians.
 ///
-/// Known robots that use this format:
+/// Known robots that use Euler YXZ:
 fn convert_axis_angle_to_euler_yxz(rx: f64, ry: f64, rz: f64, angle: f64) -> (f64, f64, f64) {
 	let axis_norm = sqrt(rx * rx + ry * ry + rz * rz);
 
@@ -116,7 +116,7 @@ fn convert_axis_angle_to_euler_yxz(rx: f64, ry: f64, rz: f64, angle: f64) -> (f6
 /// * `euler_ry` - The rotation around the Y axis.
 /// * `euler_rz` - The rotation around the Z axis.
 ///
-/// Known robots that use this format:
+/// Known robots that use Euler YXZ:
 fn convert_euler_yxz_to_axis_angle(euler_rx: f64, euler_ry: f64, euler_rz: f64) -> (f64, f64, f64, f64) {
 	let cx = cos(euler_rx / 2.0);
 	let cy = cos(euler_ry / 2.0);
@@ -152,7 +152,7 @@ fn convert_euler_yxz_to_axis_angle(euler_rx: f64, euler_ry: f64, euler_rz: f64) 
 /// * `rz` - The Z component of the axis angle vector.
 /// * `angle` - The rotation around the axis angle vector to apply in radians.
 ///
-/// Known robots that use this format:
+/// Known robots that use Euler ZXY:
 fn convert_axis_angle_to_euler_zxy(rx: f64, ry: f64, rz: f64, angle: f64) -> (f64, f64, f64) {
 	let axis_norm = sqrt(rx * rx + ry * ry + rz * rz);
 
@@ -180,7 +180,7 @@ fn convert_axis_angle_to_euler_zxy(rx: f64, ry: f64, rz: f64, angle: f64) -> (f6
 /// * `euler_ry` - The rotation around the Y axis.
 /// * `euler_rz` - The rotation around the Z axis.
 ///
-/// Known robots that use this format:
+/// Known robots that use Euler YXZ:
 fn convert_euler_zxy_to_axis_angle(euler_rx: f64, euler_ry: f64, euler_rz: f64) -> (f64, f64, f64, f64) {
 	let cx = cos(euler_rx / 2.0);
 	let cy = cos(euler_ry / 2.0);
@@ -215,7 +215,7 @@ fn convert_euler_zxy_to_axis_angle(euler_rx: f64, euler_ry: f64, euler_rz: f64) 
 /// * `rz` - The Z component of the axis angle vector.
 /// * `angle` - The rotation around the axis angle vector to apply in radians.
 ///
-/// Known robots that use this format:
+/// Known robots that use Euler ZYX:
 /// - Mitsubishi Industrial Robot CR750/CR751 Series
 /// - Kawasaki (NOTE: this example assumes radians values, but this robot uses degrees)
 /// - Kuka (NOTE: this example assumes radians values, but this robot uses degrees)
@@ -246,7 +246,7 @@ fn convert_axis_angle_to_euler_zyx(rx: f64, ry: f64, rz: f64, angle: f64) -> (f6
 /// * `euler_ry` - The rotation around the Y axis.
 /// * `euler_rz` - The rotation around the Z axis.
 ///
-/// Known robots that use this format:
+/// Known robots that use Euler ZYX:
 /// - Mitsubishi Industrial Robot CR750/CR751 Series
 /// - Kawasaki (NOTE: this example assumes radians values, but this robot uses degrees)
 /// - Kuka (NOTE: this example assumes radians values, but this robot uses degrees)
@@ -284,7 +284,7 @@ fn convert_euler_zyx_to_axis_angle(euler_rx: f64, euler_ry: f64, euler_rz: f64) 
 /// * `rz` - The Z component of the axis angle vector.
 /// * `angle` - The rotation around the axis angle vector to apply in radians.
 ///
-/// Known robots that use this format:
+/// Known robots that use Euler YZX:
 fn convert_axis_angle_to_euler_yzx(rx: f64, ry: f64, rz: f64, angle: f64) -> (f64, f64, f64) {
 	let axis_norm = sqrt(rx * rx + ry * ry + rz * rz);
 
@@ -312,7 +312,7 @@ fn convert_axis_angle_to_euler_yzx(rx: f64, ry: f64, rz: f64, angle: f64) -> (f6
 /// * `euler_ry` - The rotation around the Y axis.
 /// * `euler_rz` - The rotation around the Z axis.
 ///
-/// Known robots that use this format:
+/// Known robots that use Euler YZX:
 fn convert_euler_yzx_to_axis_angle(euler_rx: f64, euler_ry: f64, euler_rz: f64) -> (f64, f64, f64, f64) {
 	let cx = cos(euler_rx / 2.0);
 	let cy = cos(euler_ry / 2.0);
@@ -348,7 +348,7 @@ fn convert_euler_yzx_to_axis_angle(euler_rx: f64, euler_ry: f64, euler_rz: f64) 
 /// * `rz` - The Z component of the axis angle vector.
 /// * `angle` - The rotation around the axis angle vector to apply in radians.
 ///
-/// Known robots that use this format:
+/// Known robots that use Euler XZY:
 fn convert_axis_angle_to_euler_xzy(rx: f64, ry: f64, rz: f64, angle: f64) -> (f64, f64, f64) {
 	let axis_norm = sqrt(rx * rx + ry * ry + rz * rz);
 
@@ -376,7 +376,7 @@ fn convert_axis_angle_to_euler_xzy(rx: f64, ry: f64, rz: f64, angle: f64) -> (f6
 /// * `euler_ry` - The rotation around the Y axis.
 /// * `euler_rz` - The rotation around the Z axis.
 ///
-/// Known robots that use this format:
+/// Known robots that use Euler XZY:
 fn convert_euler_xzy_to_axis_angle(euler_rx: f64, euler_ry: f64, euler_rz: f64) -> (f64, f64, f64, f64) {
 	let cx = cos(euler_rx / 2.0);
 	let cy = cos(euler_ry / 2.0);
