@@ -7,7 +7,14 @@ use crate::{
 	convert_axis_angle_to_euler_zxy,
 	convert_axis_angle_to_euler_zyx,
 	convert_axis_angle_to_euler_yzx,
-	convert_axis_angle_to_euler_xzy
+	convert_axis_angle_to_euler_xzy,
+	convert_euler_xyz_to_axis_angle,
+	convert_euler_yxz_to_axis_angle,
+	convert_euler_zxy_to_axis_angle,
+	convert_euler_zyx_to_axis_angle,
+	convert_euler_yzx_to_axis_angle,
+	convert_euler_xzy_to_axis_angle
+
 };
 
 #[test]
@@ -50,6 +57,53 @@ fn test_convert_axis_angle_to_euler() {
 	assert_relative_eq!(euler_rx, 0.1092933, epsilon = 1e-6);
 	assert_relative_eq!(euler_rz, 0.1448436, epsilon = 1e-6);
 	assert_relative_eq!(euler_ry, 0.2057181, epsilon = 1e-6);
+}
+
+#[test]
+fn test_convert_euler_to_axis_angle() {
+
+	// Using random values.
+	let euler_rx = 0.750436300174;
+	let euler_ry = 1.623036649214;
+	let euler_rz = 1.064572425829;
+
+	// Expected values are computed using https://www.andre-gaschler.com/rotationconverter/
+
+	let (rx, ry, rz, angle) = convert_euler_xyz_to_axis_angle(euler_rx, euler_ry, euler_rz);
+	assert_relative_eq!(rx,    0.615986, epsilon = 1e-6);
+	assert_relative_eq!(ry,    0.4989121, epsilon = 1e-6);
+	assert_relative_eq!(rz,    0.6096294, epsilon = 1e-6);
+	assert_relative_eq!(angle, 2.2813373, epsilon = 1e-6);
+
+	let (rx, ry, rz, angle) = convert_euler_yxz_to_axis_angle(euler_rx, euler_ry, euler_rz);
+	assert_relative_eq!(rx,    0.7702762, epsilon = 1e-6);
+	assert_relative_eq!(ry,    0.6238781, epsilon = 1e-6);
+	assert_relative_eq!(rz,    0.1321012, epsilon = 1e-6);
+	assert_relative_eq!(angle, 1.6274563, epsilon = 1e-6);
+
+	let (rx, ry, rz, angle) = convert_euler_zxy_to_axis_angle(euler_rx, euler_ry, euler_rz);
+	assert_relative_eq!(rx,   -0.1376612, epsilon = 1e-6);
+	assert_relative_eq!(ry,    0.7806416, epsilon = 1e-6);
+	assert_relative_eq!(rz,    0.6096294, epsilon = 1e-6);
+	assert_relative_eq!(angle, 2.2813373, epsilon = 1e-6);
+
+	let (rx, ry, rz, angle) = convert_euler_zyx_to_axis_angle(euler_rx, euler_ry, euler_rz);
+	assert_relative_eq!(rx,   -0.1721422, epsilon = 1e-6);
+	assert_relative_eq!(ry,    0.9761743, epsilon = 1e-6);
+	assert_relative_eq!(rz,    0.1321012, epsilon = 1e-6);
+	assert_relative_eq!(angle, 1.6274563, epsilon = 1e-6);
+
+	let (rx, ry, rz, angle) = convert_euler_yzx_to_axis_angle(euler_rx, euler_ry, euler_rz);
+	assert_relative_eq!(rx,    0.615986, epsilon = 1e-6);
+	assert_relative_eq!(ry,    0.7806416, epsilon = 1e-6);
+	assert_relative_eq!(rz,    0.1056407, epsilon = 1e-6);
+	assert_relative_eq!(angle, 2.2813373, epsilon = 1e-6);
+
+	let (rx, ry, rz, angle) = convert_euler_xzy_to_axis_angle(euler_rx, euler_ry, euler_rz);
+	assert_relative_eq!(rx,   -0.1721422, epsilon = 1e-6);
+	assert_relative_eq!(ry,    0.6238781, epsilon = 1e-6);
+	assert_relative_eq!(rz,    0.7623275, epsilon = 1e-6);
+	assert_relative_eq!(angle, 1.6274563, epsilon = 1e-6);
 }
 
 fn rand(random: &mut impl rand::Rng, min: f64, max: f64) -> f64 {
@@ -99,6 +153,16 @@ fn random_samples() -> impl Iterator<Item = (f64, f64, f64, f64)> {
 		let axis_z = rand(&mut random, 0.0, 1.0);
 		let angle = rand(&mut random, 0.0, std::f64::consts::TAU);
 		(axis_x, axis_y, axis_z, angle)
+	})
+}
+
+fn random_euler_samples() -> impl Iterator<Item = (f64, f64, f64)> {
+	let mut random: rand::rngs::StdRng = rand::SeedableRng::seed_from_u64(0);
+	(0..1_000).into_iter().map(move |_| {
+		let euler_rx = rand(&mut random, 0.0, std::f64::consts::TAU);
+		let euler_ry = rand(&mut random, 0.0, std::f64::consts::TAU);
+		let euler_rz = rand(&mut random, 0.0, std::f64::consts::TAU);
+		(euler_rx, euler_ry, euler_rz)
 	})
 }
 
@@ -155,3 +219,58 @@ fn test_random_xzy() {
 		assert_vec!((rot_x(rx) * rot_z(rz) * rot_y(ry)).scaled_axis(), rotation.scaled_axis(), 1e-10);
 	}
 }
+
+#[test]
+fn test_random_euler_xyz() {
+	for (euler_rx, euler_ry, euler_rz) in random_euler_samples() {
+		let (rx, ry, rz, angle) = convert_euler_xyz_to_axis_angle(euler_rx, euler_ry, euler_rz);
+		let rotation = rotation(rx, ry, rz, angle);
+		assert_vec!((rot_x(euler_rx) * rot_y(euler_ry) * rot_z(euler_rz)).scaled_axis(), rotation.scaled_axis(), 1e-10);
+	}
+}
+
+#[test]
+fn test_random_euler_yxz() {
+	for (euler_rx, euler_ry, euler_rz) in random_euler_samples() {
+		let (rx, ry, rz, angle) = convert_euler_yxz_to_axis_angle(euler_rx, euler_ry, euler_rz);
+		let rotation = rotation(rx, ry, rz, angle);
+		assert_vec!((rot_y(euler_ry) * rot_x(euler_rx) * rot_z(euler_rz)).scaled_axis(), rotation.scaled_axis(), 1e-10);
+	}
+}
+
+#[test]
+fn test_random_euler_zxy() {
+	for (euler_rx, euler_ry, euler_rz) in random_euler_samples() {
+		let (rx, ry, rz, angle) = convert_euler_zxy_to_axis_angle(euler_rx, euler_ry, euler_rz);
+		let rotation = rotation(rx, ry, rz, angle);
+		assert_vec!((rot_z(euler_rz) * rot_x(euler_rx) * rot_y(euler_ry)).scaled_axis(), rotation.scaled_axis(), 1e-10);
+	}
+}
+
+#[test]
+fn test_random_euler_zyx() {
+	for (euler_rx, euler_ry, euler_rz) in random_euler_samples() {
+		let (rx, ry, rz, angle) = convert_euler_zyx_to_axis_angle(euler_rx, euler_ry, euler_rz);
+		let rotation = rotation(rx, ry, rz, angle);
+		assert_vec!((rot_z(euler_rz) * rot_y(euler_ry) * rot_x(euler_rx)).scaled_axis(), rotation.scaled_axis(), 1e-10);
+	}
+}
+
+#[test]
+fn test_random_euler_yzx() {
+	for (euler_rx, euler_ry, euler_rz) in random_euler_samples() {
+		let (rx, ry, rz, angle) = convert_euler_yzx_to_axis_angle(euler_rx, euler_ry, euler_rz);
+		let rotation = rotation(rx, ry, rz, angle);
+		assert_vec!((rot_y(euler_ry) * rot_z(euler_rz) * rot_x(euler_rx)).scaled_axis(), rotation.scaled_axis(), 1e-10);
+	}
+}
+
+#[test]
+fn test_random_euler_xzy() {
+	for (euler_rx, euler_ry, euler_rz) in random_euler_samples() {
+		let (rx, ry, rz, angle) = convert_euler_xzy_to_axis_angle(euler_rx, euler_ry, euler_rz);
+		let rotation = rotation(rx, ry, rz, angle);
+		assert_vec!((rot_x(euler_rx) * rot_z(euler_rz) * rot_y(euler_ry)).scaled_axis(), rotation.scaled_axis(), 1e-10);
+	}
+}
+
