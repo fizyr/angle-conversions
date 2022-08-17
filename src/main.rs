@@ -6,8 +6,8 @@
 
 mod math;
 
-#[cfg(test)]
-mod tests;
+#[cfg(converted)]
+mod converteds;
 
 use math::{sqrt, sin, cos, atan2, asin, clamp};
 
@@ -420,59 +420,60 @@ fn main() {
 	let order = "xyz";
 	println!("Euler (rad) {}: (rx: {}, ry: {}, rz: {})", order.to_uppercase(), euler_rx, euler_ry, euler_rz);
 	println!("Euler (deg) {}: (rx: {}, ry: {}, rz: {})", order.to_uppercase(), euler_rx.to_degrees(), euler_ry.to_degrees(), euler_rz.to_degrees());
-	println!("");
+	println!();
 
-	let (test_rx,test_ry,test_rz, test_angle) = convert_euler_xyz_to_axis_angle(euler_rx, euler_ry, euler_rz);
-	println!("AxisAngle (rad): (rx: {}, ry: {}, rz: {}, angle: {})", test_rx, test_ry, test_rz, test_angle);
+	let (converted_rx,converted_ry,converted_rz, converted_angle) = convert_euler_xyz_to_axis_angle(euler_rx, euler_ry, euler_rz);
+	println!("AxisAngle (rad): (rx: {}, ry: {}, rz: {}, angle: {})", converted_rx, converted_ry, converted_rz, converted_angle);
 	println!("---");
 
 	let (euler_ry, euler_rx, euler_rz) = convert_axis_angle_to_euler_yxz(rx, ry, rz, angle);
 	let order = "yxz";
-	println!("Euler (rad) {}: (ry: {}, rx: {}, rz: {})", order.to_uppercase(), euler_rx, euler_ry, euler_rz);
+	println!("Euler (rad) {}: (ry: {}, rx: {}, rz: {})", order.to_uppercase(), euler_ry, euler_rx, euler_rz);
 	println!("Euler (deg) {}: (ry: {}, rx: {}, rz: {})", order.to_uppercase(), euler_ry.to_degrees(), euler_rx.to_degrees(), euler_rz.to_degrees());
-	println!("");
+	println!();
 
-	let (test_rx,test_ry,test_rz, test_angle) = convert_euler_yxz_to_axis_angle(euler_rx, euler_ry, euler_rz);
-	println!("AxisAngle (rad): (rx: {}, ry: {}, rz: {}, angle: {})", test_rx, test_ry, test_rz, test_angle);
+	let (converted_rx,converted_ry,converted_rz, converted_angle) = convert_euler_yxz_to_axis_angle(euler_rx, euler_ry, euler_rz);
+	println!("AxisAngle (rad): (rx: {}, ry: {}, rz: {}, angle: {})", converted_rx, converted_ry, converted_rz, converted_angle);
 	println!("---");
 
 	let (euler_rz, euler_rx, euler_ry) = convert_axis_angle_to_euler_zxy(rx, ry, rz, angle);
 	let order = "zxy";
-	println!("Euler (rad) {}: (rz: {}, rx: {}, ry: {})", order.to_uppercase(), euler_rx, euler_ry, euler_rz);
+	println!("Euler (rad) {}: (rz: {}, rx: {}, ry: {})", order.to_uppercase(), euler_rz, euler_rx, euler_ry);
 	println!("Euler (deg) {}: (rz: {}, rx: {}, ry: {})", order.to_uppercase(), euler_rz.to_degrees(), euler_rx.to_degrees(), euler_ry.to_degrees());
-	println!("");
+	println!();
 
-	let (test_rx,test_ry,test_rz, test_angle) = convert_euler_zxy_to_axis_angle(euler_rx, euler_ry, euler_rz);
-	println!("AxisAngle (rad): (rx: {}, ry: {}, rz: {}, angle: {})", test_rx, test_ry, test_rz, test_angle);
+	let (converted_rx,converted_ry,converted_rz, converted_angle) = convert_euler_zxy_to_axis_angle(euler_rx, euler_ry, euler_rz);
+	println!("AxisAngle (rad): (rx: {}, ry: {}, rz: {}, angle: {})", converted_rx, converted_ry, converted_rz, converted_angle);
 	println!("---");
 
 	let (euler_rz, euler_ry, euler_rx) = convert_axis_angle_to_euler_zyx(rx, ry, rz, angle);
 	let order = "zyx";
-	println!("Euler (rad) {}: (rz: {}, ry: {}, rx: {})", order.to_uppercase(), euler_rx, euler_ry, euler_rz);
+	println!("Euler (rad) {}: (rz: {}, ry: {}, rx: {})", order.to_uppercase(), euler_rz, euler_ry, euler_rx);
 	println!("Euler (deg) {}: (rz: {}, ry: {}, rx: {})", order.to_uppercase(), euler_rz.to_degrees(), euler_ry.to_degrees(), euler_rx.to_degrees());
-	println!("");
+	println!();
 
-	let (test_rx,test_ry,test_rz, test_angle) = convert_euler_zyx_to_axis_angle(euler_rx, euler_ry, euler_rz);
-	println!("AxisAngle (rad): (rx: {}, ry: {}, rz: {}, angle: {})", test_rx, test_ry, test_rz, test_angle);
+	let (converted_rx,converted_ry,converted_rz, converted_angle) = convert_euler_zyx_to_axis_angle(euler_rx, euler_ry, euler_rz);
+	println!("AxisAngle (rad): (rx: {}, ry: {}, rz: {}, angle: {})", converted_rx, converted_ry, converted_rz, converted_angle);
 	println!("---");
 
 	let (euler_ry, euler_rz, euler_rx) = convert_axis_angle_to_euler_yzx(rx, ry, rz, angle);
 	let order = "yzx";
 	println!("Euler (rad) {}: (ry: {}, rz: {}, rx: {})", order.to_uppercase(), euler_ry, euler_rz, euler_rx);
 	println!("Euler (deg) {}: (ry: {}, rz: {}, rx: {})", order.to_uppercase(), euler_ry.to_degrees(), euler_rz.to_degrees(), euler_rx.to_degrees());
-	println!("");
+	println!();
 
-	let (test_rx,test_ry,test_rz, test_angle) = convert_euler_yzx_to_axis_angle(euler_rz, euler_rx, euler_ry);
-	println!("AxisAngle (rad): (rx: {}, ry: {}, rz: {}, angle: {})", test_rx, test_ry, test_rz, test_angle);
+	let (converted_rx,converted_ry,converted_rz, converted_angle) = convert_euler_yzx_to_axis_angle(euler_rz, euler_rx, euler_ry);
+	println!("AxisAngle (rad): (rx: {}, ry: {}, rz: {}, angle: {})", converted_rx, converted_ry, converted_rz, converted_angle);
 	println!("---");
 
 	let (euler_rx, euler_rz, euler_ry) = convert_axis_angle_to_euler_xzy(rx, ry, rz, angle);
 	let order = "xzy";
 	println!("Euler (rad) {}: (rx: {}, rz: {}, ry: {})", order.to_uppercase(), euler_rx, euler_rz, euler_ry);
 	println!("Euler (deg) {}: (rx: {}, rz: {}, ry: {})", order.to_uppercase(), euler_rx.to_degrees(), euler_rz.to_degrees(), euler_ry.to_degrees());
+	println!();
 
-	let (test_rx,test_ry,test_rz, test_angle) = convert_euler_xzy_to_axis_angle(euler_rz, euler_ry, euler_rx);
-	println!("AxisAngle (rad): (rx: {}, ry: {}, rz: {}, angle: {})", test_rx, test_ry, test_rz, test_angle);
+	let (converted_rx,converted_ry,converted_rz, converted_angle) = convert_euler_xzy_to_axis_angle(euler_rz, euler_ry, euler_rx);
+	println!("AxisAngle (rad): (rx: {}, ry: {}, rz: {}, angle: {})", converted_rx, converted_ry, converted_rz, converted_angle);
 	println!("---");
 
 
