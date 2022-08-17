@@ -6,8 +6,8 @@
 
 mod math;
 
-#[cfg(converted)]
-mod converteds;
+#[cfg(test)]
+mod tests;
 
 use math::{sqrt, sin, cos, atan2, asin, clamp};
 
