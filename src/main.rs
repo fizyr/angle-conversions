@@ -219,6 +219,9 @@ fn convert_euler_zxy_to_axis_angle(euler_rx: f64, euler_ry: f64, euler_rz: f64) 
 /// - Mitsubishi Industrial Robot CR750/CR751 Series
 /// - Kawasaki (NOTE: this example assumes radians values, but this robot uses degrees)
 /// - Kuka (NOTE: this example assumes radians values, but this robot uses degrees)
+/// - Fanuc uses WPR angles where W is the X component, P is the Y component and R is the Z component.
+///   The result of this function for a Fanuc robot should then be interpreted as `(RPW)`.
+///   (NOTE: this example assumes radians values, but this robot uses degrees)
 fn convert_axis_angle_to_euler_zyx(rx: f64, ry: f64, rz: f64, angle: f64) -> (f64, f64, f64) {
 	let axis_norm = sqrt(rx * rx + ry * ry + rz * rz);
 
@@ -250,6 +253,9 @@ fn convert_axis_angle_to_euler_zyx(rx: f64, ry: f64, rz: f64, angle: f64) -> (f6
 /// - Mitsubishi Industrial Robot CR750/CR751 Series
 /// - Kawasaki (NOTE: this example assumes radians values, but this robot uses degrees)
 /// - Kuka (NOTE: this example assumes radians values, but this robot uses degrees)
+/// - Fanuc uses WPR angles where W is the X component, P is the Y component and R is the Z component.
+///   This function should then be used as: `convert_euler_zyx_to_axis_angle(W, P, R)`.
+///   (NOTE: this example assumes radians values, but this robot uses degrees)
 fn convert_euler_zyx_to_axis_angle(euler_rx: f64, euler_ry: f64, euler_rz: f64) -> (f64, f64, f64, f64) {
 	let cx = cos(euler_rx / 2.0);
 	let cy = cos(euler_ry / 2.0);
